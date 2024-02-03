@@ -5,7 +5,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import axios from 'axios';
 import "https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js";
 import {giveApiKey} from "./js/api.js";
-import {appendArticlesMarkup} from './js/creater.js'
+import appendArticlesMarkup from './js/creater.js'
 
 let loading = document.querySelector('.loading');
 
@@ -52,7 +52,6 @@ async function submitFunction(event){
     const query = form.elements.input.value.trim();
 try{
     const {hits} = await giveApiKey(query);
-    console.log(hits)
     appendArticlesMarkup(hits, refs.gallery)
 } catch (error) {
     console.error(error)

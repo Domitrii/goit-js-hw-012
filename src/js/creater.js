@@ -1,5 +1,5 @@
 export default function appendArticlesMarkup(hits , gallery) {
-    const markup = articles
+    const markup = hits
       .map(
         ({webformatURL,largeImageURL,tags,likes,views,comments,downloads,}) => `
         <li class="gallery-item">
