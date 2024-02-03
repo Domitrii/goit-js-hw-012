@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery</title>
+    
+  <script type="module" crossorigin src="/goit-js-hw-012/commonHelpers.js"></script>
+  <link rel="modulepreload" crossorigin href="/goit-js-hw-012/assets/vendor-b41a7778.js">
+  <link rel="stylesheet" href="/goit-js-hw-012/assets/vendor-eb6030bc.css">
+  <link rel="stylesheet" href="/goit-js-hw-012/assets/index-e85a07c4.css">
+</head>
+<body>
+  <form class="form">
+    <input
+        class="form-input"
+        type="text"
+        name="input"
+        placeholder="Search images"
+      />
+    <button type="submit" class="search-button">Search</button>
+  </form>
+  <div class="loading is-hidden">
+    <span class="loader"></span>Loading ...
+  </div>
+  <ul class="gallery"></ul>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    
+  </body>
+</html>
