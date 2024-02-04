@@ -14,7 +14,17 @@ const refs = {
     input: document.querySelector('.form-input'), 
     gallery: document.querySelector('.gallery'),
     searchBtn: document.querySelector('.search-button'), 
+    loadMoreBtn: document.querySelector('.dead-end-btn'),
+    waiter: document.querySelector('.please-wait'),
+    noMore: document.querySelector('.no-more'),
 };
+
+const hiddenClass = 'is-hidden';
+let page = 1;
+let query = '';
+let maxPage = 0;
+let per_page = 12;
+
 
 function showErrorMessage(message) {
     iziToast.show({
@@ -48,14 +58,55 @@ function hideLoader() {
 
 async function submitFunction(event){
     event.preventDefault();
+    refs.gallery.innerHTML = ''
+    showLoader()
     const form = event.currentTarget
-    const query = form.elements.input.value.trim();
+    query = form.elements.input.value.trim();
 try{
-    const {hits} = await giveApiKey(query);
+    const {hits, totalHits} = await giveApiKey(query);
+
+    maxPage = Math.ceil(totalHits / per_page)
+    console.log(maxPage)
+
+    hideLoader()
     appendArticlesMarkup(hits, refs.gallery)
+    lightbox.refresh();
+    if(hits.length > 0 & hits.length !== totalHits){
+        refs.loadMoreBtn.classList.remove(hiddenClass)
+        refs.loadMoreBtn.addEventListener('click', handleLoadMore)
+    } else {
+        refs.loadMoreBtn.classList.add(hiddenClass)
+        showErrorMessage(
+            `Sorry, incorrect input value`
+        )
+    }
 } catch (error) {
     console.error(error)
 } finally{
     form.reset()
 }
 }
+
+async function handleLoadMore(){
+    refs.loadMoreBtn.classList.add(hiddenClass)
+    refs.waiter.classList.remove(hiddenClass)
+    page += 1;
+
+    try{
+        const {hits} = await giveApiKey(query, page);
+        appendArticlesMarkup(hits, refs.gallery)
+        lightbox.refresh();
+        refs.waiter.classList.add(hiddenClass)
+    } catch (err) {
+        console.log(err)
+    } finally {
+        refs.loadMoreBtn.classList.remove(hiddenClass)
+        if(page === maxPage){
+            refs.loadMoreBtn.classList.add(hiddenClass)
+            refs.loadMoreBtn.removeEventListener('click', handleLoadMore)
+            refs.noMore.classList.remove(hiddenClass)
+        }
+    }
+}
+
+window.scrollBy(2)
