@@ -23,7 +23,7 @@ const hiddenClass = 'is-hidden';
 let page = 1;
 let query = '';
 let maxPage = 0;
-let per_page = 12;
+let per_page = 15;
 
 
 function showErrorMessage(message) {
@@ -48,12 +48,12 @@ refs.form.addEventListener('submit', submitFunction);
 
 function hideLoader() {
     setTimeout(() => {
-        loading.classList.add('is-hidden');
+        loading.classList.add(hiddenClass);
         }, 500);
   };
 
   function showLoader() {
-    loading.classList.remove('is-hidden')
+    loading.classList.remove(hiddenClass)
   }; 
 
 async function submitFunction(event){
@@ -62,17 +62,17 @@ async function submitFunction(event){
     showLoader()
     const form = event.currentTarget
     query = form.elements.input.value.trim();
+    refs.noMore.classList.add(hiddenClass)
 try{
     const {hits, totalHits} = await giveApiKey(query);
 
     maxPage = Math.ceil(totalHits / per_page)
-    console.log(maxPage)
 
     hideLoader()
     appendArticlesMarkup(hits, refs.gallery)
     lightbox.refresh();
-    if(hits.length > 0 & hits.length !== totalHits){
-        refs.loadMoreBtn.classList.remove(hiddenClass)
+    if(hits.length > 0 && hits.length !== totalHits){
+       await refs.loadMoreBtn.classList.remove(hiddenClass)
         refs.loadMoreBtn.addEventListener('click', handleLoadMore)
     } else {
         refs.loadMoreBtn.classList.add(hiddenClass)

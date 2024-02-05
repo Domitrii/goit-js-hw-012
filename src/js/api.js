@@ -6,7 +6,7 @@ function giveApiKey(q, page = 1){
         params: {
             key: API_KEY,
             q: q,
-            per_page: 12,
+            per_page: 15,
             lang: "en",
             page,
         }
