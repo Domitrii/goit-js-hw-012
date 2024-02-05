@@ -108,5 +108,3 @@ async function handleLoadMore(){
         }
     }
 }
-
-window.scrollBy(2)

@@ -1,3 +1,5 @@
+import icons from '../img/icons.svg'
+
 export default function appendArticlesMarkup(hits , gallery) {
     const markup = hits
       .map(
@@ -15,7 +17,7 @@ export default function appendArticlesMarkup(hits , gallery) {
             width="20"
             height="20"
             class="icon-in-block">
-            <use href="../icons.svg#icon-heart"></use>
+            <use href="${icons}#icon-heart"></use>
             </svg>
             <span class="descr-span">${likes}</span> 
             </span>
@@ -24,7 +26,7 @@ export default function appendArticlesMarkup(hits , gallery) {
             width="20"
             height="20"
             class="icon-in-block">
-            <use href="../icons.svg#icon-eye"></use>
+            <use href="${icons}#icon-eye"></use>
             </svg>
             <span class="descr-span">${views}</span> 
             </span>
@@ -33,7 +35,7 @@ export default function appendArticlesMarkup(hits , gallery) {
             width="20"
             height="20"
             class="icon-in-block">
-            <use href="../icons.svg#icon-bubble2"></use>
+            <use href="${icons}#icon-bubble2"></use>
             </svg>
             <span class="descr-span">${comments}</span> 
             </span>
@@ -42,7 +44,7 @@ export default function appendArticlesMarkup(hits , gallery) {
             width="20"
             height="20"
             class="icon-in-block">
-            <use href="../icons.svg#icon-arrow-down"></use>
+            <use href="${icons}#icon-arrow-down"></use>
             </svg>
             <span class="descr-span">${downloads}</span>
             </span>
