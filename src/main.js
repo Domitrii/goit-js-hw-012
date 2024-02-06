@@ -46,7 +46,7 @@ function showErrorMessage(message) {
   });
 
 refs.form.addEventListener('submit', submitFunction);
-
+refs.loadMoreBtn.addEventListener('click', handleLoadMore)
 function hideLoader() {
     setTimeout(() => {
         loading.classList.add(hiddenClass);
@@ -61,9 +61,13 @@ async function submitFunction(event){
     event.preventDefault();
     refs.gallery.innerHTML = ''
     showLoader()
+    page = 1;
     const form = event.currentTarget
     query = form.elements.input.value.trim();
     if(query == ''){
+        loading.classList.add(hiddenClass)
+        refs.loadMoreBtn.classList.add(hiddenClass)
+        refs.noMore.classList.add(hiddenClass)
         return;
     }
     refs.noMore.classList.add(hiddenClass)
@@ -76,7 +80,6 @@ try{
     lightbox.refresh();
     if(hits.length > 0 && hits.length !== totalHits){
         refs.loadMoreBtn.classList.remove(hiddenClass)
-        refs.loadMoreBtn.addEventListener('click', handleLoadMore)
     } else {
         refs.loadMoreBtn.classList.add(hiddenClass)
         showErrorMessage(
