@@ -63,17 +63,19 @@ async function submitFunction(event){
     showLoader()
     const form = event.currentTarget
     query = form.elements.input.value.trim();
+    if(query == ''){
+        return;
+    }
     refs.noMore.classList.add(hiddenClass)
 try{
     const {hits, totalHits} = await giveApiKey(query);
-
     maxPage = Math.ceil(totalHits / per_page)
 
     hideLoader()
     appendArticlesMarkup(hits, refs.gallery)
     lightbox.refresh();
     if(hits.length > 0 && hits.length !== totalHits){
-       await refs.loadMoreBtn.classList.remove(hiddenClass)
+        refs.loadMoreBtn.classList.remove(hiddenClass)
         refs.loadMoreBtn.addEventListener('click', handleLoadMore)
     } else {
         refs.loadMoreBtn.classList.add(hiddenClass)
