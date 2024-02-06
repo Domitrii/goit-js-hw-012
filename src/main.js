@@ -82,6 +82,7 @@ try{
         refs.loadMoreBtn.classList.remove(hiddenClass)
     } else {
         refs.loadMoreBtn.classList.add(hiddenClass)
+        loading.classList.add(hiddenClass)
         showErrorMessage(
             `Sorry, incorrect input value`
         )
